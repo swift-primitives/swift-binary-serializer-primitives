@@ -3,7 +3,8 @@
 //
 // Binary serializer for Int64 with endianness.
 
-public import Binary_Serializer_Primitives_Core
+public import Binary_Primitives
+public import Binary_Serializer_Witness_Primitives
 
 extension Int64 {
     /// Returns a serializer for writing `Int64` in the given endianness.

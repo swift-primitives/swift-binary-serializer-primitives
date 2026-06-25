@@ -3,7 +3,9 @@
 //
 // Binary serializer for UInt8.
 
-public import Binary_Serializer_Primitives_Core
+public import Binary_Primitives
+public import Binary_Serializer_Witness_Primitives
+internal import Byte_Primitives
 
 extension UInt8 {
     /// Returns a serializer for writing a single byte as `UInt8`.

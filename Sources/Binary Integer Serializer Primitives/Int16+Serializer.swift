@@ -3,7 +3,8 @@
 //
 // Binary serializer for Int16 with endianness.
 
-public import Binary_Serializer_Primitives_Core
+public import Binary_Primitives
+public import Binary_Serializer_Witness_Primitives
 
 extension Int16 {
     /// Returns a serializer for writing `Int16` in the given endianness.

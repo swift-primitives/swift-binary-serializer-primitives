@@ -17,8 +17,9 @@
 // The Buffer is fixed to [Byte] (the byte-domain canonical buffer per
 // [API-BYTE-003] / the W2 byte-typing discipline).
 
+public import Binary_Primitives
+internal import Byte_Primitives
 public import Witness_Primitives
-public import Byte_Primitives
 
 extension Binary {
     /// A witness for binary serialization as a closure-based plain witness.

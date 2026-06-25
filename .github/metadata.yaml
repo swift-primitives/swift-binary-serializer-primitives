@@ -1,0 +1,9 @@
+# .github/metadata.yaml
+description: "Binary-domain serialization: the Binary.Serializable streaming protocol, the Binary.Serializer witness, and endianness-aware integer serializers."
+topics:
+  - primitives
+  - serialization
+  - binary
+homepage: "https://swift-institute.org"
+readme:
+  family: E

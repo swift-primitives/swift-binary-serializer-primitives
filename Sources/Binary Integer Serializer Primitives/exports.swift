@@ -1,1 +1,1 @@
-@_exported public import Binary_Serializer_Primitives_Core
+@_exported public import Binary_Serializer_Witness_Primitives

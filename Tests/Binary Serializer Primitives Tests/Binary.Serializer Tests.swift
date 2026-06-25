@@ -2,7 +2,7 @@ import Binary_Integer_Serializer_Primitives
 import Binary_Serializer_Primitives_Test_Support
 import Testing
 
-@testable import Binary_Serializer_Primitives_Core
+@testable import Binary_Serializer_Witness_Primitives
 
 // MARK: - Binary.Serializer Tests
 //
@@ -67,16 +67,20 @@ extension BinarySerializerTests.Unit {
     @Test
     func `UInt32 little-endian serializer writes 4 bytes low-first`() {
         let serializer = UInt32.serializer(endianness: .little)
-        let bytes = serializer.serializeToArray(0x12345678)
+        let bytes = serializer.serializeToArray(0x1234_5678)
         #expect(bytes == [Byte(0x78), Byte(0x56), Byte(0x34), Byte(0x12)])
     }
 
     @Test
     func `UInt64 big-endian serializer writes 8 bytes high-first`() {
         let serializer = UInt64.serializer(endianness: .big)
-        let bytes = serializer.serializeToArray(0x0102030405060708)
-        #expect(bytes == [Byte(0x01), Byte(0x02), Byte(0x03), Byte(0x04),
-                          Byte(0x05), Byte(0x06), Byte(0x07), Byte(0x08)])
+        let bytes = serializer.serializeToArray(0x0102_0304_0506_0708)
+        #expect(
+            bytes == [
+                Byte(0x01), Byte(0x02), Byte(0x03), Byte(0x04),
+                Byte(0x05), Byte(0x06), Byte(0x07), Byte(0x08),
+            ]
+        )
     }
 
     @Test
@@ -117,9 +121,13 @@ extension BinarySerializerTests.Integration {
 
         var buffer: [Byte] = []
         u16.serializeAppending(0x1234, to: &buffer)
-        u32.serializeAppending(0xCAFEBABE, to: &buffer)
+        u32.serializeAppending(0xCAFE_BABE, to: &buffer)
 
-        #expect(buffer == [Byte(0x34), Byte(0x12),  // UInt16 little-endian
-                          Byte(0xCA), Byte(0xFE), Byte(0xBA), Byte(0xBE)]) // UInt32 big-endian
+        #expect(
+            buffer == [
+                Byte(0x34), Byte(0x12),  // UInt16 little-endian
+                Byte(0xCA), Byte(0xFE), Byte(0xBA), Byte(0xBE),
+            ]
+        )  // UInt32 big-endian
     }
 }

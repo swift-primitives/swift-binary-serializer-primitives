@@ -3,7 +3,8 @@
 //
 // Binary serializer for UInt32 with endianness.
 
-public import Binary_Serializer_Primitives_Core
+public import Binary_Primitives
+public import Binary_Serializer_Witness_Primitives
 
 extension UInt32 {
     /// Returns a serializer for writing `UInt32` in the given endianness.
