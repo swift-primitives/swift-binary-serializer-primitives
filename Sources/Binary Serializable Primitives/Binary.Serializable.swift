@@ -49,7 +49,7 @@ extension Binary {
         ///   - serializable: The value to serialize
         ///   - buffer: The buffer to append bytes to
         static func serialize<Buffer: RangeReplaceableCollection>(
-            _ serializable: Self,
+            _ serializable: borrowing Self,
             into buffer: inout Buffer
         ) where Buffer.Element == Byte
     }
