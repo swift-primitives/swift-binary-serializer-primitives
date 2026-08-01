@@ -17,7 +17,9 @@ import Testing
 /// Demonstrates the minimal Serializable conformance pattern.
 private struct Greeting: Binary.Serializable {
     let name: String
+}
 
+extension Greeting {
     static func serialize<Buffer>(_ greeting: Self, into buffer: inout Buffer)
     where Buffer: RangeReplaceableCollection, Buffer.Element == Byte {
         buffer.append(contentsOf: "Hello, ".utf8)
@@ -32,7 +34,9 @@ private struct Greeting: Binary.Serializable {
 private struct Element: Binary.Serializable {
     let tag: String
     let content: String
+}
 
+extension Element {
     static func serialize<Buffer>(_ element: Self, into buffer: inout Buffer)
     where Buffer: RangeReplaceableCollection, Buffer.Element == Byte {
         buffer.append(Byte(UInt8(ascii: "<")))
@@ -55,7 +59,9 @@ private struct Element: Binary.Serializable {
 /// Demonstrates compositional serialization of nested structures.
 private struct Container: Binary.Serializable {
     let children: [Element]
+}
 
+extension Container {
     static func serialize<Buffer>(_ container: Self, into buffer: inout Buffer)
     where Buffer: RangeReplaceableCollection, Buffer.Element == Byte {
         buffer.append(contentsOf: "<div>".utf8)
@@ -69,7 +75,9 @@ private struct Container: Binary.Serializable {
 /// A type demonstrating efficient serialization with capacity hints.
 private struct LargeContent: Binary.Serializable {
     let lines: [String]
+}
 
+extension LargeContent {
     static func serialize<Buffer>(_ content: Self, into buffer: inout Buffer)
     where Buffer: RangeReplaceableCollection, Buffer.Element == Byte {
         for (index, line) in content.lines.enumerated() {
@@ -86,17 +94,17 @@ private struct LargeContent: Binary.Serializable {
 /// Test suites for the `Binary.Serializable` protocol.
 ///
 /// Uses the parallel-namespace pattern because `Binary.Serializable` is a protocol.
-@Suite("Binary.Serializable")
-struct BinarySerializableTests {
+@Suite
+struct `Binary.Serializable Tests` {
     @Suite struct Unit {}
-    @Suite struct EdgeCase {}
+    @Suite struct `Edge Case` {}
     @Suite struct Integration {}
     @Suite(.serialized) struct Performance {}
 }
 
 // MARK: - Unit Tests
 
-extension BinarySerializableTests.Unit {
+extension `Binary.Serializable Tests`.Unit {
 
     @Test
     func `serialize into byte array using serialize(into:)`() {
@@ -240,7 +248,7 @@ extension BinarySerializableTests.Unit {
 
 // MARK: - Edge Case Tests
 
-extension BinarySerializableTests.EdgeCase {
+extension `Binary.Serializable Tests`.`Edge Case` {
 
     @Test
     func `empty content serializes correctly`() {
@@ -294,12 +302,12 @@ extension BinarySerializableTests.EdgeCase {
 
     @Test
     func `withSerializedBytes propagates typed errors`() throws {
-        enum TestError: Swift.Error { case test }
+        enum Fault: Swift.Error { case test }
         let greeting = Greeting(name: "Swift.Error")
 
-        #expect(throws: TestError.self) {
+        #expect(throws: Fault.self) {
             try greeting.withSerializedBytes { _ in
-                throw TestError.test
+                throw Fault.test
             }
         }
     }
@@ -307,7 +315,7 @@ extension BinarySerializableTests.EdgeCase {
 
 // MARK: - Integration Tests
 
-extension BinarySerializableTests.Integration {
+extension `Binary.Serializable Tests`.Integration {
 
     @Test
     func `pre-allocate buffer for efficiency`() {

@@ -22,6 +22,8 @@ extension Serializable where Self: RawRepresentable, Self.RawValue: StringProtoc
     /// Serializer that encodes a string-backed raw value as UTF-8 bytes.
     public static var serializer: Binary.Serializer<Self> {
         Binary.Serializer { value, buffer in
+            // swift-linter:disable:next raw value access
+            // REASON: this is the RawRepresentable default serializer itself — the bottom-out boundary; no typed alternative exists.
             let raw = value.rawValue
             buffer.append(contentsOf: [Byte](raw.utf8))
         }
@@ -34,6 +36,8 @@ extension Serializable where Self: RawRepresentable, Self.RawValue == [Byte] {
     /// Serializer that appends a byte-array-backed raw value directly.
     public static var serializer: Binary.Serializer<Self> {
         Binary.Serializer { value, buffer in
+            // swift-linter:disable:next raw value access
+            // REASON: this is the RawRepresentable default serializer itself — the bottom-out boundary; no typed alternative exists.
             buffer.append(contentsOf: value.rawValue)
         }
     }
@@ -45,6 +49,8 @@ extension Serializable where Self: RawRepresentable, Self.RawValue == [UInt8] {
     /// Serializer that bridges a `[UInt8]`-backed raw value to bytes for stdlib interop.
     public static var serializer: Binary.Serializer<Self> {
         Binary.Serializer { value, buffer in
+            // swift-linter:disable:next raw value access
+            // REASON: this is the RawRepresentable default serializer itself — the bottom-out boundary; no typed alternative exists.
             buffer.append(contentsOf: [Byte](value.rawValue))
         }
     }
@@ -56,6 +62,8 @@ extension Serializable where Self: RawRepresentable, Self.RawValue: FixedWidthIn
     /// Serializer that encodes an integer-backed raw value in native byte order.
     public static var serializer: Binary.Serializer<Self> {
         Binary.Serializer { value, buffer in
+            // swift-linter:disable:next raw value access
+            // REASON: this is the RawRepresentable default serializer itself — the bottom-out boundary; no typed alternative exists.
             let raw = value.rawValue
             let bytes: [Byte]
             #if _endian(little)

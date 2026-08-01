@@ -200,6 +200,8 @@ extension Binary.Serializable where Self: RawRepresentable, Self.RawValue: Strin
         _ serializable: Self,
         into buffer: inout Buffer
     ) where Buffer.Element == Byte {
+        // swift-linter:disable:next raw value access
+        // REASON: this is the RawRepresentable default implementation itself — the bottom-out boundary; no typed alternative exists.
         let raw = serializable.rawValue
         buffer.append(contentsOf: [Byte](raw.utf8))
     }
@@ -213,6 +215,8 @@ extension Binary.Serializable where Self: RawRepresentable, Self.RawValue == [By
         _ serializable: Self,
         into buffer: inout Buffer
     ) where Buffer.Element == Byte {
+        // swift-linter:disable:next raw value access
+        // REASON: this is the RawRepresentable default implementation itself — the bottom-out boundary; no typed alternative exists.
         buffer.append(contentsOf: serializable.rawValue)
     }
 }
@@ -225,6 +229,8 @@ extension Binary.Serializable where Self: RawRepresentable, Self.RawValue == [UI
         _ serializable: Self,
         into buffer: inout Buffer
     ) where Buffer.Element == Byte {
+        // swift-linter:disable:next raw value access
+        // REASON: this is the RawRepresentable default implementation itself — the bottom-out boundary; no typed alternative exists.
         buffer.append(contentsOf: [Byte](serializable.rawValue))
     }
 }
@@ -239,6 +245,8 @@ extension Binary.Serializable where Self: RawRepresentable, Self.RawValue == [By
         _ value: Self,
         _ body: (borrowing Swift.Span<Byte>) throws(E) -> R
     ) throws(E) -> R {
+        // swift-linter:disable:next raw value access
+        // REASON: this is the RawRepresentable default implementation itself — the bottom-out boundary; no typed alternative exists.
         let bytes = value.rawValue
         return try body(bytes.span)
     }
@@ -252,6 +260,8 @@ extension Binary.Serializable where Self: RawRepresentable, Self.RawValue: Strin
         _ value: Self,
         _ body: (borrowing Swift.Span<Byte>) throws(E) -> R
     ) throws(E) -> R {
+        // swift-linter:disable:next raw value access
+        // REASON: this is the RawRepresentable default implementation itself — the bottom-out boundary; no typed alternative exists.
         let raw = value.rawValue
         let utf8 = ContiguousArray<Byte>(raw.utf8)
         return try body(utf8.span)
@@ -270,6 +280,8 @@ extension Binary.Serializable where Self: RawRepresentable, Self.RawValue: Fixed
         _ value: Self,
         into buffer: inout Buffer
     ) where Buffer.Element == Byte {
+        // swift-linter:disable:next raw value access
+        // REASON: this is the RawRepresentable default implementation itself — the bottom-out boundary; no typed alternative exists.
         let raw = value.rawValue
         let bytes: [Byte]
         #if _endian(little)

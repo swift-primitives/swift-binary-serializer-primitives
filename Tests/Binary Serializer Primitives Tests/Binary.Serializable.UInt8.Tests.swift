@@ -10,7 +10,9 @@ import Testing
 
 private struct Greeting: Binary.Serializable {
     let name: String
+}
 
+extension Greeting {
     static func serialize<Buffer>(_ greeting: Self, into buffer: inout Buffer)
     where Buffer: RangeReplaceableCollection, Buffer.Element == Byte {
         buffer.append(contentsOf: "Hello, ".utf8)
@@ -19,8 +21,11 @@ private struct Greeting: Binary.Serializable {
     }
 }
 
-@Suite("Binary.Serializable UInt8 forwarder")
-struct BinarySerializableUInt8Tests {
+@Suite
+struct `Binary.Serializable UInt8 Tests` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
 
     @Test
     func `serialize(into: [UInt8])`() {

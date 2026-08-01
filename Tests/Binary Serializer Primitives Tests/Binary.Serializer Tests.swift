@@ -9,17 +9,17 @@ import Testing
 // Note: Binary.Serializer<Value> is generic, so per [TEST-004] we use
 // parallel namespace pattern instead of type extension pattern.
 
-@Suite("Binary.Serializer")
-struct BinarySerializerTests {
+@Suite
+struct `Binary.Serializer Tests` {
     @Suite struct Unit {}
-    @Suite struct EdgeCase {}
+    @Suite struct `Edge Case` {}
     @Suite struct Integration {}
     @Suite(.serialized) struct Performance {}
 }
 
 // MARK: - Unit Tests
 
-extension BinarySerializerTests.Unit {
+extension `Binary.Serializer Tests`.Unit {
 
     @Test
     func `serializeToArray produces expected bytes`() {
@@ -93,7 +93,7 @@ extension BinarySerializerTests.Unit {
 
 // MARK: - Edge Case Tests
 
-extension BinarySerializerTests.EdgeCase {
+extension `Binary.Serializer Tests`.`Edge Case` {
 
     @Test
     func `serializing UInt16 zero produces two zero bytes`() {
@@ -112,7 +112,7 @@ extension BinarySerializerTests.EdgeCase {
 
 // MARK: - Integration Tests
 
-extension BinarySerializerTests.Integration {
+extension `Binary.Serializer Tests`.Integration {
 
     @Test
     func `multiple serializers compose into one buffer`() {
