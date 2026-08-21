@@ -4,11 +4,6 @@ import Testing
 
 @testable import Binary_Serializer_Witness_Primitives
 
-// MARK: - Binary.Serializer Tests
-//
-// Note: Binary.Serializer<Value> is generic, so per [TEST-004] we use
-// parallel namespace pattern instead of type extension pattern.
-
 @Suite
 struct `Binary.Serializer Tests` {
     @Suite struct Unit {}
@@ -16,8 +11,6 @@ struct `Binary.Serializer Tests` {
     @Suite struct Integration {}
     @Suite(.serialized) struct Performance {}
 }
-
-// MARK: - Unit Tests
 
 extension `Binary.Serializer Tests`.Unit {
 
@@ -91,8 +84,6 @@ extension `Binary.Serializer Tests`.Unit {
     }
 }
 
-// MARK: - Edge Case Tests
-
 extension `Binary.Serializer Tests`.`Edge Case` {
 
     @Test
@@ -110,8 +101,6 @@ extension `Binary.Serializer Tests`.`Edge Case` {
     }
 }
 
-// MARK: - Integration Tests
-
 extension `Binary.Serializer Tests`.Integration {
 
     @Test
@@ -125,9 +114,9 @@ extension `Binary.Serializer Tests`.Integration {
 
         #expect(
             buffer == [
-                Byte(0x34), Byte(0x12),  // UInt16 little-endian
+                Byte(0x34), Byte(0x12),
                 Byte(0xCA), Byte(0xFE), Byte(0xBA), Byte(0xBE),
             ]
-        )  // UInt32 big-endian
+        )
     }
 }

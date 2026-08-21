@@ -56,10 +56,7 @@ let package = Package(
         ),
     ],
     targets: [
-        // MARK: - Witness sub-namespace
-        // Hosts the `Binary.Serializer` witness type, its `Serializer.Protocol`
-        // conformance, and the RawRepresentable `serializer` defaults that return
-        // `Binary.Serializer<Self>` (mutual collaborators per [MOD-026] → one sub-ns).
+
         .target(
             name: "Binary Serializer Witness Primitives",
             dependencies: [
@@ -70,7 +67,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Sibling Protocol (relocated from swift-binary-primitives)
         .target(
             name: "Binary Serializable Primitives",
             dependencies: [
@@ -84,7 +80,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Integer Serializers
         .target(
             name: "Binary Integer Serializer Primitives",
             dependencies: [
@@ -92,7 +87,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Umbrella
         .target(
             name: "Binary Serializer Primitives",
             dependencies: [
@@ -102,7 +96,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Test Support
         .target(
             name: "Binary Serializer Primitives Test Support",
             dependencies: [
@@ -116,7 +109,6 @@ let package = Package(
             path: "Tests/Support"
         ),
 
-        // MARK: - Tests
         .testTarget(
             name: "Binary Serializer Primitives Tests",
             dependencies: [

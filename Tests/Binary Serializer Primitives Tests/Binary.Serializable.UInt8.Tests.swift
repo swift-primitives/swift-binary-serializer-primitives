@@ -1,9 +1,3 @@
-// Binary.Serializable.UInt8.Tests.swift
-//
-// Tests for the stdlib-interop UInt8 forwarders on Binary.Serializable. Each
-// suite exercises construction agreement between byte-domain primary and
-// UInt8 forwarder.
-
 import Binary_Serializable_Primitives
 import Binary_Serializer_Primitives_Test_Support
 import Testing

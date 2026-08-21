@@ -1,20 +1,9 @@
-// Binary.Serializable Tests.swift
-// swift-binary-primitives
-//
-// Tests demonstrating the Binary.Serializable protocol for byte serialization.
-// These tests serve as both verification and documentation of ideal API usage patterns.
-
 import Binary_Primitives_Test_Support
 import Binary_Serializer_Primitives_Test_Support
 import Testing
 
 @testable import Binary_Serializable_Primitives
 
-// MARK: - Example Serializable Types
-
-/// A simple greeting that serializes to bytes.
-///
-/// Demonstrates the minimal Serializable conformance pattern.
 private struct Greeting: Binary.Serializable {
     let name: String
 }
@@ -28,9 +17,6 @@ extension Greeting {
     }
 }
 
-/// A composable HTML-like element demonstrating nested streaming.
-///
-/// Shows how streaming types naturally compose.
 private struct Element: Binary.Serializable {
     let tag: String
     let content: String
@@ -43,10 +29,8 @@ extension Element {
         buffer.append(contentsOf: element.tag.utf8)
         buffer.append(Byte(UInt8(ascii: ">")))
 
-        // Content
         buffer.append(contentsOf: element.content.utf8)
 
-        // Closing tag
         buffer.append(Byte(UInt8(ascii: "<")))
         buffer.append(Byte(UInt8(ascii: "/")))
         buffer.append(contentsOf: element.tag.utf8)
@@ -54,9 +38,6 @@ extension Element {
     }
 }
 
-/// A container that holds multiple streaming children.
-///
-/// Demonstrates compositional serialization of nested structures.
 private struct Container: Binary.Serializable {
     let children: [Element]
 }
@@ -72,7 +53,6 @@ extension Container {
     }
 }
 
-/// A type demonstrating efficient serialization with capacity hints.
 private struct LargeContent: Binary.Serializable {
     let lines: [String]
 }
@@ -89,11 +69,6 @@ extension LargeContent {
     }
 }
 
-// MARK: - Test Suites
-
-/// Test suites for the `Binary.Serializable` protocol.
-///
-/// Uses the parallel-namespace pattern because `Binary.Serializable` is a protocol.
 @Suite
 struct `Binary.Serializable Tests` {
     @Suite struct Unit {}
@@ -101,8 +76,6 @@ struct `Binary.Serializable Tests` {
     @Suite struct Integration {}
     @Suite(.serialized) struct Performance {}
 }
-
-// MARK: - Unit Tests
 
 extension `Binary.Serializable Tests`.Unit {
 
@@ -246,8 +219,6 @@ extension `Binary.Serializable Tests`.Unit {
     }
 }
 
-// MARK: - Edge Case Tests
-
 extension `Binary.Serializable Tests`.`Edge Case` {
 
     @Test
@@ -279,8 +250,7 @@ extension `Binary.Serializable Tests`.`Edge Case` {
 
     @Test
     func `integer literal appends raw byte not ASCII decimal`() {
-        // This test verifies that append(0xFE) appends the raw byte 254,
-        // not the ASCII decimal string "254" (which would be [50, 53, 52]).
+
         var buffer: [Byte] = []
         buffer.append(0xFE)
         buffer.append(0xFF)
@@ -312,8 +282,6 @@ extension `Binary.Serializable Tests`.`Edge Case` {
         }
     }
 }
-
-// MARK: - Integration Tests
 
 extension `Binary.Serializable Tests`.Integration {
 
